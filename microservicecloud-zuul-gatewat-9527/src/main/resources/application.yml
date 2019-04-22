@@ -1,0 +1,36 @@
+#修改端口
+server:
+  #端口号
+  port: 9527
+ 
+spring:
+  application:
+    name: springcloud-zuul-gateway
+    
+#zuul配置
+zuul:
+  prefix: /xcy  #设置统一公共前缀
+  ignored-services: "*"   #隐藏原始服务micros-dept
+  routes:
+    mydept.serviceId: micros-dept #域名映射
+    mydept.path: /myuser/**  #映射地址
+
+  
+#eureka
+eureka:
+  client: #客户端注册进eureka服务列表内
+    service-url:
+      #defaultZone: http://localhost:7001/eureka //单机版
+      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/
+  instance:
+  #修改服务名称
+    instance-id: geteway-9527.com
+     #访问路径可以显示ip地址
+    ip-address: true
+    
+#Eureka中的信息配置
+info:
+  app.name: jiyirencai-microservicecloud
+  company.name: www.jiyirencai.com
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$

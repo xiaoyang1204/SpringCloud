@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xcy.springcloud.dao.UserDao">
+	<resultMap type="com.xcy.springcloud.model.User" id="UserAll">
+		<id column="id" property="id"/>
+		<result column="username" property="username"/>
+		<result column="password" property="password"/>
+		<result column="db_source" property="dbSource"/>
+	</resultMap>
+
+
+	<insert id="insert" parameterType="com.xcy.springcloud.model.User">
+		insert into user(username , password)
+			values(#{user.username} , #{user.password})	
+	</insert>
+	
+	<select id="findAllUser" resultMap="UserAll">
+		select id , username , password , db_source from user
+	</select>
+
+</mapper>

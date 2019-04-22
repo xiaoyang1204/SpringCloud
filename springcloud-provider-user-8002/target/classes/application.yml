@@ -1,0 +1,73 @@
+#修改端口
+server:
+  #端口号
+  port: 8002
+  tomcat:
+    uri-encoding: utf-8
+  max-http-header-size: 4048576
+    
+
+# MyBatis
+mybatis:
+    # 搜索指定包别名
+    typeAliasesPackage: com.xcy.springcloud.model
+    # 配置mapper的扫描，找到所有的mapper.xml映射文件
+    mapperLocations: classpath:mybatis/*.xml
+
+     
+#模板引擎
+spring :
+  application:
+    name: micros-dept  #微服务在外暴露的名字
+    #数据源配置
+  datasource:
+      url: jdbc:mysql://localhost:3306/demo2?useUnicode=true&characterEncoding=utf8&useSSL=false
+      username: root
+      password: root
+      driver-class-name: com.mysql.jdbc.Driver
+      type: com.alibaba.druid.pool.DruidDataSource
+      connectionProperties: druid.stat.mergeSql=true
+  freemarker:
+      #关闭缓存
+      cache: false
+      request-context-attribute: request
+      #模板加载的位置
+      template-loader-path: classpath:/templates
+      #前缀
+      suffix: .htm
+      #后缀
+      prefix: /htm/
+
+
+      
+#打印SQL     
+logging:
+  level:
+     com.xcy.springcloud.dao: debug
+
+          
+#热部署
+devtools:
+    restart:
+      enabled: true
+      additional-paths: src/main/java
+      
+#eureka
+eureka:
+  client: #客户端注册进eureka服务列表内
+    service-url:
+      #defaultZone: http://localhost:7001/eureka //单机版
+      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/
+  instance:
+  #修改服务名称
+    instance-id: provider-8002
+     #访问路径可以显示ip地址
+    ip-address: true
+ 
+#Eureka中的信息配置
+info:
+  app.name: jiyirencai-microservicecloud
+  company.name: www.jiyirencai.com
+  build.artifactId: springcloud-provider-user-8002
+  build.version: 0.0.1-SNAPSHOT
+  
